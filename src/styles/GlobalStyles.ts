@@ -8,10 +8,10 @@ export default createGlobalStyle`
     --font-family: 'Roboto', sans-serif;
     --transition: 0.3s ease-in-out !important;
     --transition-slow: 0.6s ease-in-out !important;
-    --body-background: var(--color-primary);
+    --body-background: linear-gradient(to top left, var(--color-primary-dark) 0%, var(--color-primary-lighter) 135%);
     --body-background-secondary: #5546a4;
 
-    --text-color: #ffe5e5;
+    --grey: #ffe5e5;
 
     --scrol-thumb: #333;
     --scrol-bg: #89777a;
@@ -44,6 +44,11 @@ export default createGlobalStyle`
     scroll-behavior: smooth;
     font-family: var(--font-family);
     background: var(--body-background);
+  }
+
+  #root {
+    height: 100vh;
+    overflow-y: auto;
   }
 
   ::-webkit-scrollbar {

@@ -8,11 +8,11 @@ export const SearchIcon = styled(FiSearch)`
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 128px);
 `;
 
 export const Content = styled.div`
-  padding: 50px;
+  padding: 15px;
 
   width: 100%;
   height: 100%;
@@ -21,6 +21,10 @@ export const Content = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  @media (min-width: 450px) {
+    padding: 50px;
+  }
 `;
 
 export const Form = styled.form`
@@ -54,7 +58,6 @@ export const Row = styled.div`
     margin-left: 20px;
     border-radius: 50%;
   }
-
 
   .checkbox-span {
     font-size: 14px;

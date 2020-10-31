@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Header } from '../../components';
 
-import { Container, Main } from './styles';
+import { Container } from './styles';
 
 const Default: React.FC = ({ children }) => {
   const { t } = useTranslation();
@@ -31,7 +31,7 @@ const Default: React.FC = ({ children }) => {
     <Container>
       <Header />
       {getConsentNotification()}
-      <Main>{children}</Main>
+      {children}
     </Container>
   );
 };
