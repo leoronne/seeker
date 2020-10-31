@@ -12,7 +12,7 @@ import i18n from './i18n';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.Suspense fallback={<LoaderSpinner />}>
+  <React.Suspense fallback={<LoaderSpinner color="#7467D3" />}>
     <I18nextProvider i18n={i18n}>
       <React.StrictMode>
         <AppProvider>

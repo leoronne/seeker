@@ -4,5 +4,20 @@
   "accept": "Aceitar",
   "search": "Buscar",
   "search-char": "Buscar personagem",
-  "show-favorites": "Mostrar apenas personagens favoritos"
+  "show-favorites": "Mostrar apenas personagens favoritos",
+  "real_name": "Nome real",
+  "origin": "Origem",
+  "publisher": "Editora",
+  "appearances": "Nº de aparições",
+  "aliases": "Apelidos",
+  "creators": "Criadores",
+  "gender": "Gênero",
+  "gender-0": "Outro",
+  "gender-1": "Masculino",
+  "gender-2": "Feminino",
+  "gender-3": "Outro",
+  "powers": "Poderes",
+  "super_name": "Nome",
+  "issues": "edições",
+  "birth": "Aniversário"
 }
