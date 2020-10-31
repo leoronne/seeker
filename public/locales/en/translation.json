@@ -1,5 +1,8 @@
 {
-  "cookie1": "We use cookies to ensure you get the best experience on our website",
-  "cookie2": "and continue browsing without changing your settings, we assume that you accept this practice. If you wish, you can change your cookie settings at any time.",
-  "accept": "Accept"
+  "cookie1": "We use cookies to ensure you get the best experience on our website and continue browsing without changing your settings.",
+  "cookie2": "We assume that you accept this practice.",
+  "accept": "Accept",
+  "search": "Search",
+  "search-char": "Search character",
+  "show-favorites": "Show only favorite characters"
 }

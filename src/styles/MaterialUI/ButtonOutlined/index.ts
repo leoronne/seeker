@@ -7,10 +7,10 @@ const ButtonOutlined = withStyles({
     justifyContent: 'center',
     alignItems: 'center',
     background: 'transparent',
-    borderRadius: '0 !important',
+    borderRadius: 'var(--border-radius)',
     border: `2px solid var(--color-primary)`,
     outline: 0,
-    minWidth: '200px',
+    minWidth: '40px',
     fontFamily: 'var(--font-family)',
     fontSize: '14px',
     fontWeight: 700,
@@ -18,23 +18,25 @@ const ButtonOutlined = withStyles({
     height: '40px',
     cursor: 'pointer',
     transition: 'var(--transition)',
-    '& span': {
+    '& svg': {
       transition: 'var(--transition)',
       color: 'var(--color-primary)',
     },
     '&:hover': {
       transition: 'var(--transition)',
       background: 'var(--color-primary)',
-      color: 'var(--text-color)',
-    },
-    '&:hover span': {
-      transition: 'var(--transition)',
-      color: 'var(--text-color)',
+      '& svg': {
+        transition: 'var(--transition)',
+        color: 'white',
+      },
     },
     '&:focus': {
       transition: 'var(--transition)',
       background: 'var(--color-primary)',
-      color: 'var(--text-color)',
+      '& svg': {
+        transition: 'var(--transition)',
+        color: 'white',
+      },
     },
     '&:disabled': {
       color: 'var(--disabled)',

@@ -1,5 +1,8 @@
 {
-  "cookie1": "Usamos cookies para garantir a você a melhor experiência no nosso site",
-  "cookie2": "e continuar navegando sem alterar as suas configurações, supomos que você aceita esta prática. Se desejar, você pode alterar as configurações de cookies a qualquer momento.",
-  "accept": "Aceitar"
+  "cookie1": "Usamos cookies para garantir a você a melhor experiência no nosso site e continuar navegando sem alterar as suas configurações.",
+  "cookie2": "Ao continuar, supomos que você aceita esta prática.",
+  "accept": "Aceitar",
+  "search": "Buscar",
+  "search-char": "Buscar personagem",
+  "show-favorites": "Mostrar apenas personagens favoritos"
 }

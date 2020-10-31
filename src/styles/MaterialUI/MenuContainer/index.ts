@@ -17,7 +17,7 @@ export const MenuContainer = withStyles({
     '& ul, span, a': {
       fontSize: '14px !important',
       fontFamily: 'var(--font-family)',
-      color: 'var(--text-color)',
+      color: 'white',
       textDecoration: 'none !important',
     },
 
@@ -30,7 +30,7 @@ export const MenuContainer = withStyles({
       '& .MuiSelect-icon': {
         padding: '5px',
         marginLeft: '3px',
-        color: 'var(--text-color)',
+        color: 'white !important',
         top: 'calc(50% - 16px)',
         marginRight: '-10px',
       },

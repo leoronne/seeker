@@ -6,8 +6,10 @@ export const TextFieldComponent = withStyles({
     width: '100% !important',
     transition: 'var(--transition)',
     color: 'var(--placeholder-color) !important',
-    '& .MuiInputBase-root': {
-      marginBottom: '20px !important',
+    '& .MuiInputLabel-outlined': {
+      marginTop: '-6px',
+      transition: 'var(--transition-slow)',
+      fontWeight: '500',
     },
     '& .MuiInputLabel-animated': {
       fontSize: '15px',
@@ -21,20 +23,20 @@ export const TextFieldComponent = withStyles({
       borderBottom: 'none !important',
     },
     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-      borderBottom: '2px solid var(--color-primary)',
+      borderBottom: '2px solid var(--color-primary-lighter)',
       transition: 'var(--transition)',
     },
     '& label.Mui-focused': {
-      color: 'var(--color-primary)',
+      color: 'var(--color-primary-lighter)',
       fontSize: '14px',
       transition: 'var(--transition)',
     },
     '& .MuiInput-underline:hover:not(.Mui-disabled):after': {
-      borderBottom: '2px solid var(--color-primary)',
+      borderBottom: '2px solid var(--color-primary-lighter)',
       transition: 'var(--transition)',
     },
     '& .MuiInput-underline:not(.Mui-disabled):after': {
-      borderBottom: '2px solid var(--color-primary)',
+      borderBottom: '2px solid var(--color-primary-lighter)',
       transition: 'var(--transition)',
     },
     '& .MuiOutlinedInput-adornedEnd': {
@@ -55,12 +57,12 @@ export const TextFieldComponent = withStyles({
       borderWidth: '1px !important',
       '&:hover fieldset': {
         borderWidth: '1px !important',
-        borderColor: 'var(--color-primary)',
+        borderColor: 'var(--color-primary-lighter)',
         transition: 'var(--transition)',
       },
       '&:focus fieldset': {
         borderWidth: '1px !important',
-        borderColor: 'var(--color-primary)',
+        borderColor: 'var(--color-primary-lighter)',
         transition: 'var(--transition)',
       },
       '& fieldset': {
@@ -70,7 +72,7 @@ export const TextFieldComponent = withStyles({
       },
       '&.Mui-focused fieldset': {
         borderWidth: '1px !important',
-        border: `1px solid var(--color-primary)`,
+        border: `1px solid var(--color-primary-lighter)`,
         transition: 'var(--transition)',
       },
     },

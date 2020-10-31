@@ -6,7 +6,7 @@ import { Container } from './styles';
 const Loader: React.FC = () => {
   return (
     <Container className="loader-container">
-      <CircularProgress size={15} style={{ color: '#ea3d3d' }} />
+      <CircularProgress size={15} style={{ color: '#7467D3' }} />
     </Container>
   );
 };

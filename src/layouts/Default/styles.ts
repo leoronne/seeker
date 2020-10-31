@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
-  background: linear-gradient(to top, var(--color-primary) 2%, var(--color-primary-lighter) 173%);
+  background: linear-gradient(to top left, var(--color-primary-dark) 0%, var(--color-primary-lighter) 135%);
 
   padding: 40px;
 
@@ -52,10 +52,6 @@ export const Container = styled.div`
 
   .navigation-links:hover {
     transition: var(--transition);
-  }
-
-  @media (min-width: 890px) {
-  background: linear-gradient(to top, var(--color-primary) 2%, var(--color-primary-lighter) 173%);
   }
 
   @media (min-width: 1024px) {

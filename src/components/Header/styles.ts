@@ -68,6 +68,7 @@ export const HeaderRight = styled.div`
   }
 
   .MuiSelect-icon {
-    color: var(--text-color);
+    color: white;
+    margin-top: 2px;
   }
 `;
