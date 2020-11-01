@@ -7,10 +7,16 @@ export const FormControlContainer = withStyles({
     fontFamily: 'var(--font-family)',
     transition: 'var(--transition-slow)',
     borderWidth: '1px !important',
-    height: '40px',
+    height: '40px !important',
+    width: '100%',
     '&:hover': {
       borderColor: `var(--color-primary) !important`,
       transition: 'var(--transition-slow)',
+    },
+    '& .MuiSelect-root': {
+      paddingTop: '10px',
+      paddingBottom: '10px',
+      fontSize: '14px',
     },
     '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
       borderWidth: '1px !important',

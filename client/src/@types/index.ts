@@ -1,4 +1,5 @@
 export interface CharacterData {
+  id: number;
   aliases: string;
   api_detail_url: string;
   birth: string;
@@ -41,6 +42,7 @@ export interface CharacterData {
   };
   real_name: string;
   site_detail_url: string;
+  isFave: boolean;
 }
 
 export interface GetCharacterResponse {

@@ -50,11 +50,6 @@ export const Container = styled.div`
 
   color: var(--text-color);
 
-  hr {
-    margin: 15px 0;
-    border: 1px solid var(--color-primary-lighter);
-  }
-
   @media (min-width: 450px) {
     padding: 50px;
   }
@@ -161,7 +156,7 @@ export const Main = styled.main`
 
   @media (min-width: 1366px) {
     margin-top: 0px;
-    height: 100%;
+    /* height: calc(100% - 60px); */
   }
 `;
 

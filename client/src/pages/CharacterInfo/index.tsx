@@ -92,7 +92,7 @@ const CharacterInfo: React.FC = () => {
           <div className="bio">
             {charData?.image?.original_url && <img src={charData?.image?.original_url} alt={charData?.name} />}
 
-            <p>{charData?.deck}</p>
+            {charData?.deck && <p>{charData?.deck}</p>}
           </div>
 
           <TableInfo>
@@ -105,65 +105,79 @@ const CharacterInfo: React.FC = () => {
                   <td>{charData?.name}</td>
                 </tr>
 
-                <tr>
-                  <td className="column-header">
-                    <strong>{t('real_name')}</strong>
-                  </td>
-                  <td>{charData?.real_name}</td>
-                </tr>
+                {charData?.real_name && (
+                  <tr>
+                    <td className="column-header">
+                      <strong>{t('real_name')}</strong>
+                    </td>
+                    <td>{charData?.real_name}</td>
+                  </tr>
+                )}
 
-                <tr>
-                  <td className="column-header">
-                    <strong>{t('aliases')}</strong>
-                  </td>
-                  <td>{charData?.aliases}</td>
-                </tr>
+                {charData?.aliases && (
+                  <tr>
+                    <td className="column-header">
+                      <strong>{t('aliases')}</strong>
+                    </td>
+                    <td>{charData?.aliases}</td>
+                  </tr>
+                )}
 
-                <tr>
-                  <td className="column-header">
-                    <strong>{t('publisher')}</strong>
-                  </td>
-                  <td>{charData?.publisher.name}</td>
-                </tr>
+                {charData?.publisher?.name && (
+                  <tr>
+                    <td className="column-header">
+                      <strong>{t('publisher')}</strong>
+                    </td>
+                    <td>{charData?.publisher?.name}</td>
+                  </tr>
+                )}
 
-                <tr>
-                  <td className="column-header">
-                    <strong>{t('creators')}</strong>
-                  </td>
-                  <td>
-                    {charData?.creators.map((creator, index) => {
-                      return (
-                        <>
-                          {index > 0 && ', '}
-                          <a href={creator.site_detail_url} target="_blank" rel="noopener noreferrer">
-                            {creator.name}
-                          </a>
-                        </>
-                      );
-                    })}
-                  </td>
-                </tr>
+                {charData?.creators.length > 0 && (
+                  <tr>
+                    <td className="column-header">
+                      <strong>{t('creators')}</strong>
+                    </td>
+                    <td>
+                      {charData?.creators.map((creator, index) => {
+                        return (
+                          <>
+                            {index > 0 && ', '}
+                            <a href={creator.site_detail_url} target="_blank" rel="noopener noreferrer">
+                              {creator.name}
+                            </a>
+                          </>
+                        );
+                      })}
+                    </td>
+                  </tr>
+                )}
 
-                <tr>
-                  <td className="column-header">
-                    <strong>{t('gender')}</strong>
-                  </td>
-                  <td>{t(`gender-${charData?.gender}`)}</td>
-                </tr>
+                {charData?.gender && (
+                  <tr>
+                    <td className="column-header">
+                      <strong>{t('gender')}</strong>
+                    </td>
+                    <td>{t(`gender-${charData?.gender}`)}</td>
+                  </tr>
+                )}
 
-                <tr>
-                  <td className="column-header">
-                    <strong>{t('origin')}</strong>
-                  </td>
-                  <td>{charData?.origin?.name}</td>
-                </tr>
+                {charData?.origin?.name && (
+                  <tr>
+                    <td className="column-header">
+                      <strong>{t('origin')}</strong>
+                    </td>
+                    <td>{charData?.origin?.name}</td>
+                  </tr>
+                )}
 
-                <tr>
-                  <td className="column-header">
-                    <strong>{t('appearances')}</strong>
-                  </td>
-                  <td>{`${charData?.count_of_issue_appearances} ${t('issues')}`} </td>
-                </tr>
+                {charData?.count_of_issue_appearances && (
+                  <tr>
+                    <td className="column-header">
+                      <strong>{t('appearances')}</strong>
+                    </td>
+                    <td>{`${charData?.count_of_issue_appearances} ${t('issues')}`} </td>
+                  </tr>
+                )}
 
                 <tr>
                   <td className="column-header">
@@ -172,12 +186,14 @@ const CharacterInfo: React.FC = () => {
                   <td>{charData?.birth ? charData?.birth : 'n/a'}</td>
                 </tr>
 
-                <tr>
-                  <td className="column-header">
-                    <strong>{t('powers')}</strong>
-                  </td>
-                  <td>{charData?.powers.map((power, index) => `${index > 0 ? ', ' : ''}${power.name}`)}</td>
-                </tr>
+                {charData?.powers.length > 0 && (
+                  <tr>
+                    <td className="column-header">
+                      <strong>{t('powers')}</strong>
+                    </td>
+                    <td>{charData?.powers.map((power, index) => `${index > 0 ? ', ' : ''}${power.name}`)}</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </TableInfo>

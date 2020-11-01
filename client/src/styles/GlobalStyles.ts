@@ -51,6 +51,12 @@ export default createGlobalStyle`
     overflow-y: auto;
   }
 
+  hr {
+    margin: 15px 0;
+    border: 1px solid var(--color-primary-lighter);
+    width: 100%;
+  }
+
   ::-webkit-scrollbar {
     width: 5px;
   }
@@ -129,4 +135,34 @@ export default createGlobalStyle`
       }
     }
   }
+
+    .navigation-links {
+      text-decoration: none;
+      color: var(--color-primary-dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .navigation-links:before {
+      content: '';
+      position: absolute;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--color-primary-dark);
+      visibility: hidden;
+      transition: all var(--transition);
+      width: 0;
+    }
+
+    .navigation-links:hover:before {
+      visibility: visible;
+      width: 100%;
+    }
+
+    .navigation-links:hover {
+      transition: var(--transition);
+    }
 `;

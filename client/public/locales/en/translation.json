@@ -19,5 +19,9 @@
   "powers": "Powers",
   "super_name": "Super Name",
   "issues": "issues",
-  "birth": "Birthday"
+  "birth": "Birthday",
+  "show": "Show",
+  "results-1": "We found",
+  "results-2": "results",
+  "results-3": "are on your favorites list"
 }

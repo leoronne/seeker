@@ -1,4 +1,5 @@
 export interface CharacterData {
+  id: number;
   aliases: string;
   api_detail_url: string;
   birth: string;

@@ -1,0 +1,18 @@
+{
+  "name": "meliuz-frontend-test",
+  "version": "1.0.0",
+  "repository": "https://github.com/leoronne/meliuz-frontend-test",
+  "author": "Leonardo Ronne <leoronne@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm install --prefix server",
+    "start:web": "cd ./client/ && npm run start",
+    "start:server": "cd ./server/ && npm run dev:server",
+    "install:web": "cd ./client/ && npm install",
+    "install:server": "cd ./server/ && npm install"
+  },
+  "engines": {
+    "node": "12.16.2"
+  }
+}

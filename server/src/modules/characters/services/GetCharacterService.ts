@@ -28,6 +28,7 @@ const fields = [
   'powers',
   'publisher',
   'site_detail_url',
+  'id'
 ];
 const format = 'json';
 
