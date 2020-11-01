@@ -6,12 +6,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "postinstall": "yarn install --prefix server && yarn run build --prefix server",
     "start:web": "cd ./client/ && npm run start",
     "start:server": "cd ./server/ && npm start",
-    "dev:server": "cd ./server/ && npm run dev:server",
-    "install:web": "cd ./client/ && npm install",
-    "install:server": "cd ./server/ && npm install"
+    "dev:server": "cd ./server/ && npm run dev:server"
   },
   "engines": {
     "node": "12.16.2"
