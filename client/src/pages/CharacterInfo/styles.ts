@@ -1,6 +1,15 @@
-import styled from 'styled-components';
-import { FiArrowLeft, FiEdit, FiHeart } from 'react-icons/fi';
+import styled, { css } from 'styled-components';
+import { FiArrowLeft, FiEdit, FiHeart, FiSave } from 'react-icons/fi';
 import { BsBoxArrowUpRight } from 'react-icons/bs';
+import { MdCancel } from 'react-icons/md';
+
+const iconCss = css`
+  width: 15px;
+  height: 15px;
+
+  color: var(--color-primary);
+  cursor: pointer;
+`;
 
 export const ReturnIcon = styled(FiArrowLeft)`
   width: 20px;
@@ -11,19 +20,19 @@ export const ReturnIcon = styled(FiArrowLeft)`
 `;
 
 export const LinkIcon = styled(BsBoxArrowUpRight)`
-  width: 15px;
-  height: 15px;
-
-  color: var(--color-primary);
-  cursor: pointer;
+  ${iconCss}
 `;
 
 export const EditIcon = styled(FiEdit)`
-  width: 15px;
-  height: 15px;
+  ${iconCss}
+`;
 
-  color: var(--color-primary);
-  cursor: pointer;
+export const CancelIcon = styled(MdCancel)`
+  ${iconCss}
+`;
+
+export const SaveIcon = styled(FiSave)`
+  ${iconCss}
 `;
 
 export const LikeIcon = styled(FiHeart)<{ fillcolor: string; strokecolor: string }>`
@@ -42,7 +51,7 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
 
-  margin-top: 40px;
+  margin-top: 30px;
 
   border-radius: var(--border-radius);
   background-color: white;
@@ -96,51 +105,8 @@ export const Header = styled.div`
     margin-left: 20px;
   }
 
-  .header-right {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-
-    flex-direction: column;
-
-    height: 100%;
-
-    .hover-button + .hover-button {
-      margin-top: 5px;
-    }
-
-    .hover-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 30px;
-
-      cursor: pointer;
-
-      transition: background var(--transition-slow);
-
-      border-radius: 50%;
-
-      &:hover {
-        background: var(--grey);
-
-        transition: background var(--transition-slow);
-      }
-    }
-  }
-
   @media (min-width: 350px) {
     height: auto;
-    .header-right {
-      flex-direction: row;
-      .hover-button + .hover-button {
-        margin-top: 0;
-        margin-left: 5px;
-      }
-    }
   }
 `;
 
@@ -152,10 +118,11 @@ export const Main = styled.main`
 
   margin-top: 35px;
 
-  overflow-y: auto;
+  /* overflow-y: auto; */
 
   @media (min-width: 1366px) {
     margin-top: 0px;
+    height: 100%;
     /* height: calc(100% - 60px); */
   }
 `;
@@ -166,36 +133,34 @@ export const TableInfo = styled.div`
   justify-content: flex-start;
   flex-direction: column;
 
+  margin-top: 20px;
+
+  padding: 20px;
+
   width: 100%;
 
-  margin-top: 25px;
-
-  table {
+  .field {
     width: 100%;
-    td {
-      border: 1px solid var(--grey);
-      padding: 5px;
-      &.column-header {
-        min-width: 150px;
-      }
-    }
-    a {
-      text-decoration: none;
-      color: var(--color-primary-lighter);
-      transition: color var(--transition-slow);
-
-      &:hover {
-        transition: color var(--transition-slow);
-        color: var(--color-primary);
-      }
-    }
   }
+
+  .field + .field {
+    margin-top: 25px;
+  }
+
   @media (min-width: 868px) {
-    margin-top: 0;
+    padding: 50px;
+    display: grid;
+    flex-direction: row;
+    grid-template-columns: repeat(auto-fill, minmax(35%, 1fr));
+    grid-gap: 25px;
+
+    .field + .field {
+      margin-top: 0;
+    }
   }
 `;
 
-export const Row = styled.div`
+export const Form = styled.form`
   width: 100%;
   display: flex;
   align-items: center;
@@ -203,27 +168,61 @@ export const Row = styled.div`
   flex-direction: column;
 
   .bio {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 
+    position: relative;
+
     img {
       max-width: 240px;
+      border-radius: var(--border-radius);
     }
     p {
+      font-size: 17px;
       margin-top: 25px;
+    }
+
+    .header-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+
+      flex-direction: column;
+
+      height: 100%;
+
+      .hover-button + .hover-button {
+        margin-top: 5px;
+      }
+
+      .hover-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+
+        cursor: pointer;
+
+        transition: background var(--transition-slow);
+
+        border-radius: 50%;
+
+        &:hover {
+          background: var(--grey);
+
+          transition: background var(--transition-slow);
+        }
+      }
     }
   }
 
-  @media (min-width: 868px) {
-    display: grid;
-    flex-direction: row;
-    grid-template-columns: repeat(auto-fill, minmax(47.5%, 1fr));
-    grid-gap: 5%;
-  }
-
-  @media (min-width: 1366px) {
+  @media (min-width: 686px) {
     .bio {
       flex-direction: row;
       p {
@@ -231,5 +230,9 @@ export const Row = styled.div`
         margin-left: 25px;
       }
     }
+  }
+
+  @media (min-width: 1366px) {
+    height: 100%;
   }
 `;

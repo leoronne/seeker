@@ -3,7 +3,7 @@ export interface CharacterData {
   aliases: string;
   api_detail_url: string;
   birth: string;
-  count_of_issue_appearances: number;
+  count_of_issue_appearances: number | string;
   // creators: Array<{
   //   api_detail_url: string;
   //   id: number;

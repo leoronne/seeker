@@ -48,6 +48,7 @@ export const TextFieldComponent = withStyles({
       fontSize: '14px',
       fontFamily: 'var(--font-family)',
       transition: 'var(--transition)',
+      color: 'var(--text-color)',
     },
     '& .MuiInput-underline.Mui-error:after': {
       borderBottomColor: 'red',
