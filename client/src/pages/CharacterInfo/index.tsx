@@ -13,25 +13,6 @@ import api from '../../services/api';
 
 import { Container, Header, Main, ReturnIcon, LinkIcon, TableInfo, Row, EditIcon, LikeIcon } from './styles';
 
-const fields = [
-  'name',
-  'gender',
-  'real_name',
-  'aliases',
-  'birth',
-  'api_detail_url',
-  'count_of_issue_appearances',
-  'deck',
-  'image',
-  'creators',
-  'origin',
-  'powers',
-  'publisher',
-  'site_detail_url',
-];
-const format = 'json';
-const apiKey = process.env.REACT_APP_API_KEY;
-
 const CharacterInfo: React.FC = () => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
@@ -48,18 +29,14 @@ const CharacterInfo: React.FC = () => {
   const loadData = useCallback(async (charId: string) => {
     try {
       setLoading(true);
-      const response = await api.get(`/character/${charId}/?api_key=${apiKey}&format=${format}&field_list=${fields.join(',')}`);
+      const response = await api.get(`/characters/${charId}`);
       const { data } = response;
-      const { results } = data;
 
-      if (!results) {
+      if (!data) {
         history.push('/not-found');
       }
 
-      const aliases = results?.aliases ? results?.aliases.replace(/\r\n/g, ', ') : null;
-      results.aliases = aliases;
-
-      setCharData(results);
+      setCharData(data);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err.message);
@@ -94,7 +71,7 @@ const CharacterInfo: React.FC = () => {
 
         <h1>{charData?.name}</h1>
 
-        <a href={charData.site_detail_url} target="_blank" rel="noopener noreferrer" className="link-button">
+        <a href={charData?.site_detail_url} target="_blank" rel="noopener noreferrer" className="link-button">
           <LinkIcon />
         </a>
 
