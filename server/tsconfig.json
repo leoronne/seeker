@@ -10,7 +10,6 @@
     "allowJs": true,
     "paths": {
       "@modules/*": ["modules/*"],
-      "@config/*": ["config/*"],
       "@shared/*": ["shared/*"]
     },
     "esModuleInterop": true,
@@ -18,5 +17,5 @@
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["docs/*", "coverage/*", "jest.config.js", "prettier.config.js", "ormconfig.ts"]
+  "exclude": ["docs/*", "coverage/*", "jest.config.js", "prettier.config.js", "ormconfig.ts", "babel.config.js"]
 }

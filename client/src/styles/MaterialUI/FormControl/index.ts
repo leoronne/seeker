@@ -10,7 +10,7 @@ export const FormControlContainer = withStyles({
     height: '40px !important',
     width: '100%',
     '&:hover': {
-      borderColor: `var(--color-primary) !important`,
+      borderColor: `var(--color-primary-lighter) !important`,
       transition: 'var(--transition-slow)',
     },
     '& .MuiSelect-root': {
@@ -20,7 +20,7 @@ export const FormControlContainer = withStyles({
     },
     '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
       borderWidth: '1px !important',
-      borderColor: `var(--color-primary) !important`,
+      borderColor: `var(--color-primary-lighter) !important`,
       transition: 'var(--transition-slow)',
     },
     '& .MuiOutlinedInput-root fieldset': {
@@ -28,7 +28,7 @@ export const FormControlContainer = withStyles({
       transition: 'var(--transition-slow)',
     },
     '& .MuiOutlinedInput-root:hover fieldset': {
-      borderColor: `var(--color-primary) !important`,
+      borderColor: `var(--color-primary-lighter) !important`,
       transition: 'var(--transition-slow)',
     },
     '& .MuiFormLabel-root': {
@@ -44,7 +44,8 @@ export const FormControlContainer = withStyles({
       height: '100%',
     },
     '& .MuiFormLabel-root.MuiInputLabel-shrink': {
-      transform: 'translate(14px, -6px) scale(0.75) !important',
+      color: 'rgba(0, 0, 0, 0.38)',
+      transform: 'translate(14px, -10px) scale(0.75) !important',
     },
   },
 })(FormControl);

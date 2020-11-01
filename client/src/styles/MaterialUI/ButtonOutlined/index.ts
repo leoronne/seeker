@@ -18,14 +18,14 @@ const ButtonOutlined = withStyles({
     height: '40px',
     cursor: 'pointer',
     transition: 'var(--transition)',
-    '& svg': {
+    '& svg, span': {
       transition: 'var(--transition)',
       color: 'var(--color-primary)',
     },
     '&:hover': {
       transition: 'var(--transition)',
       background: 'var(--color-primary)',
-      '& svg': {
+      '& svg, span': {
         transition: 'var(--transition)',
         color: 'white',
       },
@@ -33,7 +33,7 @@ const ButtonOutlined = withStyles({
     '&:focus': {
       transition: 'var(--transition)',
       background: 'var(--color-primary)',
-      '& svg': {
+      '& svg, span': {
         transition: 'var(--transition)',
         color: 'white',
       },
