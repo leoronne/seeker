@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "postinstall": "npm install --prefix server && npm run build --prefix server",
+    "postinstall": "yarn install --prefix server && yarn run build --prefix server",
     "start:web": "cd ./client/ && npm run start",
     "start:server": "cd ./server/ && npm start",
     "dev:server": "cd ./server/ && npm run dev:server",
