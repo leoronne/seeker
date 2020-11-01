@@ -6,9 +6,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "postinstall": "npm install --prefix server",
+    "postinstall": "npm install --prefix server && npm run build --prefix server",
     "start:web": "cd ./client/ && npm run start",
-    "start:server": "cd ./server/ && npm run dev:server",
+    "start:server": "cd ./server/ && npm start",
+    "dev:server": "cd ./server/ && npm run dev:server",
     "install:web": "cd ./client/ && npm install",
     "install:server": "cd ./server/ && npm install"
   },

@@ -6,9 +6,6 @@ import cors from 'cors';
 import { errors } from 'celebrate';
 import AppError from '@shared/errors/AppError';
 
-import '@shared/infra/database';
-import '@shared/container';
-
 import routes from './routes';
 
 require('dotenv/config');

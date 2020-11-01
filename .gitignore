@@ -30,3 +30,5 @@ yarn-error.log*
 .firebaserc
 firebase.json
 .firebase
+
+dist
