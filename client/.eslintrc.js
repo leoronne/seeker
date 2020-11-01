@@ -25,6 +25,8 @@ module.exports = {
     camelcase: 0,
     'prettier/prettier': 0,
     'no-use-before-define': 0,
-    'import/prefer-default-export': 0
+    'import/prefer-default-export': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
+    'jsx-a11y/no-static-element-interactions': 0,
   },
 };

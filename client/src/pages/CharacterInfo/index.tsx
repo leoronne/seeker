@@ -1,15 +1,17 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, Redirect, useParams, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
 
 import { LoaderSpinner } from '../../components';
 
 import { CharacterData } from '../../@types';
+import { IState } from '../../store';
 
 import api from '../../services/api';
+import { editCharacter } from '../../store/modules/edittedCharacters/actions';
 
 import { Container, Header, Main, ReturnIcon, LinkIcon, TableInfo, Row, EditIcon, LikeIcon } from './styles';
 
@@ -17,6 +19,9 @@ const CharacterInfo: React.FC = () => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const edittedCharacters = useSelector<IState, CharacterData[]>(state => state.edittedCharacters);
+  const { enqueueSnackbar } = useSnackbar();
 
   const [loading, setLoading] = useState(true);
   const [isFave, setIsFave] = useState(false);
@@ -36,10 +41,13 @@ const CharacterInfo: React.FC = () => {
         history.push('/not-found');
       }
 
-      setCharData(data);
+      const char_is_on_state = edittedCharacters.findIndex(favorite => favorite.id === data.id);
+      if (char_is_on_state >= 0) {
+        setCharData(edittedCharacters[char_is_on_state]);
+        setIsFave(edittedCharacters[char_is_on_state]?.is_fave);
+      } else setCharData(data);
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err.message);
+      enqueueSnackbar(err?.response?.data?.error ? err.response.data.error : err.message, { variant: 'error' });
       history.push('/');
     } finally {
       setLoading(false);
@@ -51,8 +59,9 @@ const CharacterInfo: React.FC = () => {
   }, [id]);
 
   const handleFave = useCallback(() => {
+    dispatch(editCharacter(charData, !isFave));
     setIsFave(!isFave);
-  }, [isFave]);
+  }, [isFave, dispatch, charData]);
 
   if (loading) {
     return <LoaderSpinner color="#fff" />;
@@ -81,7 +90,7 @@ const CharacterInfo: React.FC = () => {
           </div>
 
           <div className="hover-button" onClick={() => handleFave()}>
-            <LikeIcon fillColor={isFave ? 'red' : 'white'} strokeColor={isFave ? 'red' : 'var(--color-primary)'} />
+            <LikeIcon fillcolor={isFave ? 'red' : 'white'} strokecolor={isFave ? 'red' : 'var(--color-primary)'} />
           </div>
         </div>
       </Header>
@@ -132,26 +141,6 @@ const CharacterInfo: React.FC = () => {
                   </tr>
                 )}
 
-                {charData?.creators.length > 0 && (
-                  <tr>
-                    <td className="column-header">
-                      <strong>{t('creators')}</strong>
-                    </td>
-                    <td>
-                      {charData?.creators.map((creator, index) => {
-                        return (
-                          <>
-                            {index > 0 && ', '}
-                            <a href={creator.site_detail_url} target="_blank" rel="noopener noreferrer">
-                              {creator.name}
-                            </a>
-                          </>
-                        );
-                      })}
-                    </td>
-                  </tr>
-                )}
-
                 {charData?.gender && (
                   <tr>
                     <td className="column-header">
@@ -185,15 +174,6 @@ const CharacterInfo: React.FC = () => {
                   </td>
                   <td>{charData?.birth ? charData?.birth : 'n/a'}</td>
                 </tr>
-
-                {charData?.powers.length > 0 && (
-                  <tr>
-                    <td className="column-header">
-                      <strong>{t('powers')}</strong>
-                    </td>
-                    <td>{charData?.powers.map((power, index) => `${index > 0 ? ', ' : ''}${power.name}`)}</td>
-                  </tr>
-                )}
               </tbody>
             </table>
           </TableInfo>

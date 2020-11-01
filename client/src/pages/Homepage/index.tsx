@@ -1,21 +1,31 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { CircularProgress, MenuItem } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
+import { CircularProgress } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
+
+import CharacterCard from './CharacterCard';
+import PaginationArea from './PaginationArea';
 
 import api from '../../services/api';
+import { editCharacter } from '../../store/modules/edittedCharacters/actions';
 
-import { LoaderSpinner, Paginator } from '../../components';
+import { LoaderSpinner } from '../../components';
 
 import { CharacterData } from '../../@types';
+import { IState } from '../../store';
 
-import { useStyles, TextField, ButtonOutlined, StyledCheckbox, Select, FormControl, InputLabel } from '../../styles/MaterialUI';
+import { TextField, ButtonOutlined, StyledCheckbox } from '../../styles/MaterialUI';
 
-import { Container, Content, Form, Row, SearchIcon, Main, Header, PaginationArea, CharacterCard, LinkIcon, LikeIcon } from './styles';
+import { Container, Content, Form, Row, SearchIcon, Main, Header } from './styles';
 
 const Homepage: React.FC = () => {
+  document.title = `Seeker`;
+
   const { t } = useTranslation();
-  const classes = useStyles();
+  const dispatch = useDispatch();
+  const edittedCharacters = useSelector<IState, CharacterData[]>(state => state.edittedCharacters);
+  const { enqueueSnackbar } = useSnackbar();
 
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
@@ -29,50 +39,103 @@ const Homepage: React.FC = () => {
   const [characters, setCharacters] = useState<CharacterData[]>([]);
 
   const loadData = useCallback(
-    async (filter: string) => {
+    async (filter: string, page: number = offset, limit: number = recordsPerPage) => {
       try {
-        setLoading(true);
-        const sortQuery = `&sort=${encodeURI('date_added:asc')}`;
-        const offsetQuery = `&offset=${offset}`;
-        const limitQuery = `&limit=${recordsPerPage}`;
-        const filterQuery = filter && `&filter=name:${encodeURI(filter)}`;
-        const response = await api.get(`characters?${sortQuery}${offsetQuery}${limitQuery}${filterQuery}`);
-        const { data } = response;
-        setTotalRecords(data?.number_of_total_results);
-        setCharacters(data?.results);
+        if (!showFavorites) {
+          setLoading(true);
+          const sortQuery = `&sort=${encodeURI('date_added:asc')}`;
+          const offsetQuery = `&offset=${page}`;
+          const limitQuery = `&limit=${limit}`;
+          const filterQuery = filter && `&filter=name:${encodeURI(filter)}`;
+          const response = await api.get(`characters?${sortQuery}${offsetQuery}${limitQuery}${filterQuery}`);
+          const { data } = response;
+          const { results } = data;
+
+          const formatedResults = results.map((character: CharacterData) => {
+            const char_is_on_state = edittedCharacters.findIndex(favorite => favorite.id === character.id);
+
+            if (char_is_on_state >= 0) {
+              return edittedCharacters[char_is_on_state];
+            }
+            return character;
+          });
+
+          setTotalRecords(data?.number_of_total_results);
+          setCharacters(formatedResults);
+        }
       } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err.message);
-        // notify(err?.response?.data?.error ? err.response.data.error : err.message, 'error');
+        enqueueSnackbar(err?.response?.data?.error ? err.response.data.error : err.message, { variant: 'error' });
       } finally {
         setLoading(false);
       }
     },
-    [offset, recordsPerPage]
+    [showFavorites]
+  );
+
+  const loadFavorites = useCallback(
+    async (page: number, limit: number) => {
+      let oldEdittedCharacters = edittedCharacters;
+      if (search) {
+        oldEdittedCharacters = oldEdittedCharacters.filter(character => character.name === search);
+      }
+      setCharacters(oldEdittedCharacters.slice(page, limit + page));
+      setTotalRecords(oldEdittedCharacters.length);
+    },
+    [search, edittedCharacters]
   );
 
   const handleSubmit = useCallback(
     async e => {
       e.preventDefault();
-      await loadData(search);
+      if (!showFavorites) await loadData(search, offset, recordsPerPage);
+      else loadFavorites(offset, recordsPerPage);
     },
-    [search]
+    [search, showFavorites, offset, recordsPerPage]
   );
 
   useEffect(() => {
     loadData('');
   }, [loadData]);
 
+  const changeRecordsPerPage = useCallback(
+    async (value: number) => {
+      setRecordsPerPage(value);
+      // const tempPage = offset === 0 ? 1 : value / offset;
+
+      // setCurrentPage(tempPage);
+
+      if (!showFavorites) await loadData(search, offset, value);
+      else loadFavorites(offset, value);
+    },
+    [offset, search, showFavorites, loadData, loadFavorites]
+  );
+
   const setCurrentPage = useCallback(
     async (page: number) => {
-      let tempOffset = 0;
-
-      tempOffset = (page - 1) * recordsPerPage;
+      const tempOffset = (page - 1) * recordsPerPage;
 
       setOffset(tempOffset);
       setTargetPage(page);
+
+      if (!showFavorites) await loadData(search, tempOffset);
+      else loadFavorites(tempOffset, recordsPerPage);
     },
-    [recordsPerPage]
+    [recordsPerPage, showFavorites, loadData, loadFavorites]
+  );
+
+  const handleFave = useCallback(
+    (isFave: boolean, charData: CharacterData, index: number) => {
+      dispatch(editCharacter(charData, !isFave));
+
+      const updatedCharacters = characters;
+      updatedCharacters[index] = {
+        ...charData,
+        is_fave: !isFave,
+      };
+
+      setCharacters(updatedCharacters);
+    },
+    [dispatch, characters]
   );
 
   return (
@@ -111,78 +174,24 @@ const Homepage: React.FC = () => {
             <div className="results">
               <p>
                 {`${t('results-1')} `}
-                <strong>{totalRecords}</strong>
+                <strong>{Intl.NumberFormat('en-US').format(Number(totalRecords))}</strong>
                 {` ${t('results-2')}`}
-              </p>
-
-              <p>
-                <strong>3</strong>
-                {` ${t('results-3')}`}
               </p>
             </div>
           </Header>
 
           <hr />
 
-          {loading ? (
-            <LoaderSpinner color="#7467D3" />
-          ) : (
-            <div className="characters-container">
-              {characters.map(character => {
-                return (
-                  <CharacterCard>
-                    <div className="left">
-                      <Link target="_blank" rel="noopener noreferrer" to={`/info/4005-${character?.id}`}>
-                        <img src={character?.image.icon_url} alt={character?.name} key={character?.id} />
-                      </Link>
+          {loading ? <LoaderSpinner color="#7467D3" /> : <CharacterCard data={characters} handleFave={handleFave} />}
 
-                      <div className="info">
-                        <p>
-                          <Link target="_blank" rel="noopener noreferrer" to={`/info/4005-${character?.id}`} className="navigation-links">
-                            <strong>{character?.name}</strong>
-                          </Link>
-                        </p>
-                        {character?.publisher?.name && <p className="publisher">{character?.publisher?.name}</p>}
-                      </div>
-                    </div>
-
-                    <div className="right">
-                      <span className="link-button">
-                        <LikeIcon fillColor={character.isFave ? 'red' : 'white'} strokeColor={character.isFave ? 'red' : 'var(--color-primary)'} />
-                      </span>
-
-                      <Link target="_blank" rel="noopener noreferrer" to={`/info/4005-${character?.id}`}>
-                        <LinkIcon />
-                      </Link>
-                    </div>
-                  </CharacterCard>
-                );
-              })}
-            </div>
-          )}
-
-          <PaginationArea>
-            <div className="pagination">
-              <Paginator totalRecords={totalRecords} recordsPerPage={recordsPerPage} setOffset={setOffset} currentPage={targetPage} setCurrentPage={setCurrentPage} />
-            </div>
-
-            <div className="view">
-              <FormControl variant="outlined">
-                <InputLabel>{t('show')}</InputLabel>
-
-                <Select
-                  value={recordsPerPage}
-                  onChange={e => setRecordsPerPage(Number(e.target.value))}
-                  label={t('show')}
-                  MenuProps={{ classes: { paper: classes.selectOptions } }}
-                >
-                  <MenuItem value="10">{`10 ${t('results-2')}`}</MenuItem>
-                  <MenuItem value="50">{`50 ${t('results-2')}`}</MenuItem>
-                  <MenuItem value="100">{`100 ${t('results-2')}`}</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-          </PaginationArea>
+          <PaginationArea
+            totalRecords={totalRecords}
+            recordsPerPage={recordsPerPage}
+            targetPage={targetPage}
+            setRecordsPerPage={changeRecordsPerPage}
+            setCurrentPage={setCurrentPage}
+            setOffset={setOffset}
+          />
         </Main>
       </Content>
     </Container>

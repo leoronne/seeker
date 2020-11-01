@@ -26,14 +26,14 @@ export const EditIcon = styled(FiEdit)`
   cursor: pointer;
 `;
 
-export const LikeIcon = styled(FiHeart)<{ fillColor: string; strokeColor: string }>`
+export const LikeIcon = styled(FiHeart)<{ fillcolor: string; strokecolor: string }>`
   width: 15px;
   height: 15px;
 
   cursor: pointer;
 
-  color: ${props => (props.strokeColor ? `${props.strokeColor}` : 'var(--color-primary)')};
-  fill: ${props => (props.fillColor ? `${props.fillColor}` : 'var(--color-primary)')};
+  color: ${props => (props.strokecolor ? `${props.strokecolor}` : 'var(--color-primary)')};
+  fill: ${props => (props.fillcolor ? `${props.fillcolor}` : 'var(--color-primary)')};
 `;
 
 export const Container = styled.div`

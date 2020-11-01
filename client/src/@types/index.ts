@@ -4,12 +4,12 @@ export interface CharacterData {
   api_detail_url: string;
   birth: string;
   count_of_issue_appearances: number;
-  creators: Array<{
-    api_detail_url: string;
-    id: number;
-    name: string;
-    site_detail_url: string;
-  }>;
+  // creators: Array<{
+  //   api_detail_url: string;
+  //   id: number;
+  //   name: string;
+  //   site_detail_url: string;
+  // }>;
   deck: string;
   gender: number;
   image: {
@@ -30,11 +30,11 @@ export interface CharacterData {
     id: number;
     name: string;
   };
-  powers: Array<{
-    api_detail_url: string;
-    id: number;
-    name: string;
-  }>;
+  // powers: Array<{
+  //   api_detail_url: string;
+  //   id: number;
+  //   name: string;
+  // }>;
   publisher: {
     api_detail_url: string;
     id: number;
@@ -42,7 +42,7 @@ export interface CharacterData {
   };
   real_name: string;
   site_detail_url: string;
-  isFave: boolean;
+  is_fave: boolean;
 }
 
 export interface GetCharacterResponse {
@@ -52,5 +52,5 @@ export interface GetCharacterResponse {
   number_of_page_results: number;
   number_of_total_results: number;
   status_code: number;
-  results: CharacterData;
+  results: CharacterData[];
 }
