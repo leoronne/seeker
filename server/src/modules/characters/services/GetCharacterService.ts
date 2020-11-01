@@ -53,7 +53,10 @@ class GetCharacterService {
         throw new Error('Character not found');
       }
 
-      const aliases = results?.aliases ? results?.aliases.replace(/\r\n/g, ', ') : null;
+      let aliases = results?.aliases ? results?.aliases : null;
+      aliases = aliases ? aliases.replace(/\r/g, '') : null;
+      aliases = aliases ? aliases.replace(/\n/g, ', ') : null;
+
       results.aliases = aliases;
 
       const character = results;

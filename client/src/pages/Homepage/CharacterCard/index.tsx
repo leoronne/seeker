@@ -18,7 +18,7 @@ const CharacterCard: React.FC<Props> = ({ data, handleFave }) => {
           <Content key={character.id}>
             <div className="left">
               <Link to={`/info/4005-${character?.id}`}>
-                <img src={character?.image.icon_url} alt={character?.name} key={character?.id} />
+                <img src={character?.image?.icon_url} alt={character?.name} key={character?.id} />
               </Link>
 
               <div className="info">

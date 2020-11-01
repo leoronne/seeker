@@ -7,27 +7,27 @@ export const InputLabelContainer = withStyles({
     fontFamily: 'var(--font-family)',
     transition: 'var(--transition-slow)',
     '&:hover': {
-      color: 'var(--color-primary)',
+      color: 'var(--color-primary-lighter)',
       transition: 'var(--transition-slow)',
     },
     '&:focus': {
-      color: 'var(--color-primary)',
+      color: 'var(--color-primary-lighter)',
       transition: 'var(--transition-slow)',
     },
     '& .Mui-focused': {
-      color: `var(--color-primary) !important`,
+      color: `var(--color-primary-lighter) !important`,
     },
   },
   focused: {
-    color: `var(--color-primary) !important`,
-    borderColor: 'var(--color-primary)',
+    color: `var(--color-primary-lighter) !important`,
+    borderColor: 'var(--color-primary-lighter)',
     transition: 'var(--transition-slow)',
   },
   outlined: {
-    borderColor: 'var(--color-primary)',
+    borderColor: 'var(--color-primary-lighter)',
     transition: 'var(--transition-slow)',
     '& .Mui-focused': {
-      color: `var(--color-primary) !important`,
+      color: `var(--color-primary-lighter) !important`,
     },
   },
 })(InputLabel);
