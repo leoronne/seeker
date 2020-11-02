@@ -8,6 +8,7 @@
   <a href="#project-star2">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#techs-rocket">Techs</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#installation-wrench">Installation</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#start-on">Start</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#test-heavy_check_mark">Test</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#license-memo">License</a>
 </p>
@@ -27,19 +28,19 @@ Deployed [here](https://seeker.ronne.dev/).
 <br>
 
 <p align="center">
-  <img src="src\assets\img\project-1.gif"/>
+  <img src="client\src\assets\img\project-1.gif"/>
 </p>
 
 <br>
 
 <p align="center">
-  <img src="src\assets\img\project-2.gif"/>
+  <img src="client\src\assets\img\project-2.gif"/>
 </p>
 
 <br>
 
 <p align="center">
-  <img src="src\assets\img\project-3.gif"/>
+  <img src="client\src\assets\img\project-3.gif"/>
 </p>
 
 <br>
@@ -61,7 +62,7 @@ Then you can install the application using `npm install` or `yarn install` on th
 
 <br>
 
-## Test :heavy_check_mark:
+## Start :on:
 
 To start the application <strong>interface</strong> just run `npm run start:web` or `yarn start:web` on the root dir of the folder.
 
@@ -72,6 +73,12 @@ To start the application <strong>server</strong> just run `npm run dev:server` o
 You can generate the Comic Vine API Key [here](https://comicvine.gamespot.com/api/).
 
 </strong>
+
+<br>
+
+## Test :heavy_check_mark:
+
+To run the tests on this application, just run `npm run test:cover` or `yarn test:cover` on the client directory, it will generate a coverage report on the same dir.
 
 <br>
 
