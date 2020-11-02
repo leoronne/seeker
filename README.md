@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src\assets\img\transparentBanner.png" />
+  <img src="client\src\assets\img\transparentBanner.png" />
 </p>
 
 ##
@@ -51,13 +51,15 @@ Deployed [here](https://seeker-meliuz.web.app/).
 
 First you need to clone the project using `git clone https://github.com/leoronne/meliuz-frontend-test.git`.
 
-Then you can install the application using `npm install` or `yarn install` on the root dir of the client and server folder.
+Then you can install the application using `npm install` or `yarn install` on the client and server directory.
 
 <br>
 
 ## Test :heavy_check_mark:
 
-To start the application interface just run `npm start` or `yarn start` on the root dir of the folder.
+To start the application <strong>interface</strong> just run `npm run start:web` or `yarn start:web` on the root dir of the folder.
+
+To start the application <strong>server</strong> just run `npm run dev:server` or `yarn dev:server` on the root dir of the folder.
 
 <strong>Note: you need to create a .env file on the [server directory](<https://github.com/leoronne/meliuz-frontend-test/blob/master/server/.env.example>) and one on the [client directory](<https://github.com/leoronne/meliuz-frontend-test/blob/master/client/.env.example>) based on the example files. 
 
