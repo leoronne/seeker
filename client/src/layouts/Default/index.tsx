@@ -8,6 +8,7 @@ import { Container } from './styles';
 
 const Default: React.FC = ({ children }) => {
   const { t } = useTranslation();
+
   const getConsentNotification = () => {
     if (Cookies.get('@Seeker:cookies') !== 'true')
       return (
@@ -27,6 +28,7 @@ const Default: React.FC = ({ children }) => {
       );
     return null;
   };
+  
   return (
     <Container>
       <Header />

@@ -118,12 +118,9 @@ export const Main = styled.main`
 
   margin-top: 35px;
 
-  /* overflow-y: auto; */
-
   @media (min-width: 1366px) {
     margin-top: 0px;
     height: 100%;
-    /* height: calc(100% - 60px); */
   }
 `;
 

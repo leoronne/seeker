@@ -3,7 +3,7 @@
 exports[`NotFound page should render 1`] = `
 <DocumentFragment>
   <div
-    class="sc-iwaifL eqZWre"
+    class="sc-iwaifL iXlNWQ"
     data-testid="not-found-page"
   >
     <div

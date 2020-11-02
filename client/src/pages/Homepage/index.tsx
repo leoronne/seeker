@@ -94,7 +94,11 @@ const Homepage: React.FC = () => {
     async e => {
       e.preventDefault();
       if (!showFavorites) await loadData(search, offset, recordsPerPage);
-      else loadFavorites(search, offset, recordsPerPage);
+      else {
+        setTargetPage(1);
+        setOffset(0);
+        loadFavorites(search, 0, recordsPerPage);
+      }
     },
     [search, showFavorites, offset, recordsPerPage]
   );

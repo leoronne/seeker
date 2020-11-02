@@ -26,7 +26,7 @@ interface FormikProps {
   origin: string;
   gender: number;
   publisher: string;
-  count_of_issue_appearances: number | string;
+  count_of_issue_appearances: string | number;
   birth: string;
 }
 
@@ -34,7 +34,7 @@ const CharacterInfo: React.FC = () => {
   const { NODE_ENV } = process.env;
 
   const { t } = useTranslation();
-  const { id } = process.env.NODE_ENV === 'test' ? { id: '4005-51713' } : useParams<{ id: string }>();
+  const { id } = NODE_ENV === 'test' ? { id: '4005-51713' } : useParams<{ id: string }>();
   const history = useHistory();
   const dispatch = useDispatch();
   const edittedCharacters = useSelector<IState, CharacterData[]>(state => state.edittedCharacters);
@@ -47,6 +47,17 @@ const CharacterInfo: React.FC = () => {
   const [charData, setCharData] = useState<CharacterData>(NODE_ENV === 'test' ? characterResponse : ({} as CharacterData));
 
   const formRef = useRef(null);
+
+  const INITIAL_VALUES: FormikProps = {
+    name: charData?.name || '',
+    real_name: charData?.real_name || '',
+    aliases: charData?.aliases || '',
+    origin: charData?.origin?.name || '',
+    gender: charData?.gender || 0,
+    publisher: charData?.publisher?.name || '',
+    count_of_issue_appearances: charData?.count_of_issue_appearances || 0,
+    birth: charData?.birth || '',
+  };
 
   if (!id) {
     return <Redirect to="/" />;
@@ -63,6 +74,7 @@ const CharacterInfo: React.FC = () => {
       }
 
       const char_is_on_state = edittedCharacters.findIndex(favorite => favorite.id === data.id);
+
       if (char_is_on_state >= 0) {
         setCharData(edittedCharacters[char_is_on_state]);
         setIsFave(edittedCharacters[char_is_on_state]?.is_fave);
@@ -87,14 +99,13 @@ const CharacterInfo: React.FC = () => {
   const cancelEdit = useCallback(
     (setValue: (field: string, value: string | number | null, shouldValidate?: boolean | undefined) => void) => {
       setEdit(true);
-      setValue('name', charData?.name || '');
-      setValue('real_name', charData?.real_name || '');
-      setValue('aliases', charData?.aliases || '');
-      setValue('origin', charData?.origin?.name || '');
-      setValue('gender', charData?.gender || 0);
-      setValue('publisher', charData?.publisher?.name || '');
-      setValue('count_of_issue_appearances', `${charData?.count_of_issue_appearances} ${t('issues')}` || '');
-      setValue('birth', charData?.birth || '');
+
+      const keys = Object.keys(INITIAL_VALUES);
+      const values = Object.values(INITIAL_VALUES);
+
+      keys.forEach((key, index) => {
+        setValue(key, values[index]);
+      });
     },
     [charData]
   );
@@ -104,6 +115,7 @@ const CharacterInfo: React.FC = () => {
       try {
         setEdit(true);
         const character: CharacterData = {
+          ...charData,
           name: values.name,
           real_name: values.real_name,
           aliases: values.aliases,
@@ -120,13 +132,6 @@ const CharacterInfo: React.FC = () => {
           },
           count_of_issue_appearances: values.count_of_issue_appearances,
           birth: values.birth,
-
-          id: charData?.id,
-          image: charData?.image,
-          api_detail_url: charData?.api_detail_url,
-          deck: charData?.deck,
-          is_fave: charData?.is_fave,
-          site_detail_url: charData?.site_detail_url,
         };
         setCharData(character);
         dispatch(editCharacter(character, isFave));
@@ -164,16 +169,7 @@ const CharacterInfo: React.FC = () => {
       <hr />
       <Main>
         <Formik
-          initialValues={{
-            name: charData?.name || '',
-            real_name: charData?.real_name || '',
-            aliases: charData?.aliases || '',
-            origin: charData?.origin?.name || '',
-            gender: charData?.gender || 0,
-            publisher: charData?.publisher?.name || '',
-            count_of_issue_appearances: charData?.count_of_issue_appearances || 0,
-            birth: charData?.birth || '',
-          }}
+          initialValues={INITIAL_VALUES}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
             saveEdit(values);
@@ -181,7 +177,7 @@ const CharacterInfo: React.FC = () => {
           }}
         >
           {}
-          {({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue }) => (
+          {({ values, handleChange, handleBlur, handleSubmit, setFieldValue }) => (
             <Form onSubmit={handleSubmit} ref={formRef}>
               <div className="bio">
                 {charData?.image?.original_url && <img src={charData?.image?.original_url} alt={charData?.name} />}
@@ -208,7 +204,6 @@ const CharacterInfo: React.FC = () => {
               <TableInfo>
                 <div className="field">
                   <TextField
-                    error={!!(touched.name && errors.name)}
                     disabled={edit}
                     name="name"
                     type="text"
@@ -218,13 +213,11 @@ const CharacterInfo: React.FC = () => {
                     value={values.name}
                     label={t('super_name')}
                     inputProps={{ maxLength: 40, 'data-testid': 'name-input' }}
-                    helperText={touched.name && errors.name ? errors.name : ''}
                   />
                 </div>
 
                 <div className="field">
                   <TextField
-                    error={!!(touched.real_name && errors.real_name)}
                     disabled={edit}
                     name="real_name"
                     type="text"
@@ -233,13 +226,11 @@ const CharacterInfo: React.FC = () => {
                     onBlur={handleBlur}
                     value={values.real_name}
                     label={t('real_name')}
-                    helperText={touched.real_name && errors.real_name ? errors.real_name : ''}
                   />
                 </div>
 
                 <div className="field">
                   <TextField
-                    error={!!(touched.publisher && errors.publisher)}
                     disabled={edit}
                     name="publisher"
                     type="text"
@@ -248,13 +239,11 @@ const CharacterInfo: React.FC = () => {
                     onBlur={handleBlur}
                     value={values.publisher}
                     label={t('publisher')}
-                    helperText={touched.publisher && errors.publisher ? errors.publisher : ''}
                   />
                 </div>
 
                 <div className="field">
                   <TextField
-                    error={!!(touched.aliases && errors.aliases)}
                     disabled={edit}
                     name="aliases"
                     type="text"
@@ -263,23 +252,11 @@ const CharacterInfo: React.FC = () => {
                     onBlur={handleBlur}
                     value={values.aliases}
                     label={t('aliases')}
-                    helperText={touched.aliases && errors.aliases ? errors.aliases : ''}
                   />
                 </div>
 
                 <div className="field">
-                  <TextField
-                    error={!!(touched.origin && errors.origin)}
-                    disabled={edit}
-                    name="origin"
-                    type="text"
-                    variant="outlined"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.origin}
-                    label={t('origin')}
-                    helperText={touched.origin && errors.origin ? errors.origin : ''}
-                  />
+                  <TextField disabled={edit} name="origin" type="text" variant="outlined" onChange={handleChange} onBlur={handleBlur} value={values.origin} label={t('origin')} />
                 </div>
 
                 <div className="field">
@@ -302,23 +279,11 @@ const CharacterInfo: React.FC = () => {
                 </div>
 
                 <div className="field">
-                  <TextField
-                    error={!!(touched.birth && errors.birth)}
-                    disabled={edit}
-                    name="birth"
-                    type="text"
-                    variant="outlined"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.birth}
-                    label={t('birth')}
-                    helperText={touched.birth && errors.birth ? errors.birth : ''}
-                  />
+                  <TextField disabled={edit} name="birth" type="text" variant="outlined" onChange={handleChange} onBlur={handleBlur} value={values.birth} label={t('birth')} />
                 </div>
 
                 <div className="field">
                   <TextField
-                    error={!!(touched.count_of_issue_appearances && errors.count_of_issue_appearances)}
                     disabled={edit}
                     name="count_of_issue_appearances"
                     type="text"
@@ -327,7 +292,6 @@ const CharacterInfo: React.FC = () => {
                     onBlur={handleBlur}
                     value={values.count_of_issue_appearances}
                     label={t('appearances')}
-                    helperText={touched.count_of_issue_appearances && errors.count_of_issue_appearances ? errors.count_of_issue_appearances : ''}
                   />
                 </div>
               </TableInfo>

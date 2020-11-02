@@ -12,8 +12,7 @@ const Route: React.FC<RouteWrapperProps> = ({ component: Component, ...rest }) =
   return (
     <ReactDOMRoute
       {...rest}
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      render={({ location }) => {
+      render={() => {
         return (
           <DefaultLayout>
             <Component />
