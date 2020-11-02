@@ -13,19 +13,13 @@ const LanguageProvider: React.FC = ({ children }) => {
   const [language, setLanguage] = useState('en');
 
   const changeLanguage = useCallback((lgn: string) => {
-    i18n.changeLanguage(lgn);
+    if (process.env.NODE_ENV !== 'test') i18n.changeLanguage(lgn);
     Cookies.set('@Seeker:language', lgn);
     setLanguage(lgn);
   }, []);
 
   useEffect(() => {
-    const wantUseCookie = Cookies.get('@Seeker:cookies');
-
-    let lgnstrg = 'en';
-
-    if (wantUseCookie === 'true') {
-      lgnstrg = Cookies.get('@Seeker:language');
-    }
+    const lgnstrg = Cookies.get('@Seeker:language') || 'en';
     changeLanguage(lgnstrg);
   }, [changeLanguage]);
 

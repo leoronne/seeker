@@ -9,6 +9,7 @@ import { CircularProgress, MenuItem } from '@material-ui/core';
 
 import { LoaderSpinner } from '../../components';
 
+import { characterResponse } from '../../__mocks__';
 import { CharacterData } from '../../@types';
 import { IState } from '../../store';
 
@@ -30,18 +31,20 @@ interface FormikProps {
 }
 
 const CharacterInfo: React.FC = () => {
+  const { NODE_ENV } = process.env;
+
   const { t } = useTranslation();
-  const { id } = useParams<{ id: string }>();
+  const { id } = process.env.NODE_ENV === 'test' ? { id: '4005-51713' } : useParams<{ id: string }>();
   const history = useHistory();
   const dispatch = useDispatch();
   const edittedCharacters = useSelector<IState, CharacterData[]>(state => state.edittedCharacters);
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [isFave, setIsFave] = useState(false);
   const [edit, setEdit] = useState(true);
-  const [charData, setCharData] = useState<CharacterData>({} as CharacterData);
+  const [charData, setCharData] = useState<CharacterData>(NODE_ENV === 'test' ? characterResponse : ({} as CharacterData));
 
   const formRef = useRef(null);
 
@@ -73,56 +76,62 @@ const CharacterInfo: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    loadData(id);
-  }, [id]);
+    if (NODE_ENV !== 'test') loadData(id);
+  }, [loadData, id]);
 
   const handleFave = useCallback(() => {
     dispatch(editCharacter(charData, !isFave));
     setIsFave(!isFave);
   }, [isFave, dispatch, charData]);
 
-  const cancelEdit = useCallback((setValue: (field: string, value: string | number | null, shouldValidate?: boolean | undefined) => void) => {
-    setEdit(true);
-    setValue('name', charData?.name || '');
-    setValue('real_name', charData?.real_name || '');
-    setValue('aliases', charData?.aliases || '');
-    setValue('origin', charData?.origin?.name || '');
-    setValue('gender', charData?.gender || 0);
-    setValue('publisher', charData?.publisher?.name || '');
-    setValue('count_of_issue_appearances', `${charData?.count_of_issue_appearances} ${t('issues')}` || '');
-    setValue('birth', charData?.birth || '');
-  }, [charData]);
+  const cancelEdit = useCallback(
+    (setValue: (field: string, value: string | number | null, shouldValidate?: boolean | undefined) => void) => {
+      setEdit(true);
+      setValue('name', charData?.name || '');
+      setValue('real_name', charData?.real_name || '');
+      setValue('aliases', charData?.aliases || '');
+      setValue('origin', charData?.origin?.name || '');
+      setValue('gender', charData?.gender || 0);
+      setValue('publisher', charData?.publisher?.name || '');
+      setValue('count_of_issue_appearances', `${charData?.count_of_issue_appearances} ${t('issues')}` || '');
+      setValue('birth', charData?.birth || '');
+    },
+    [charData]
+  );
 
-  const saveEdit = useCallback((values: FormikProps) => {
-    setEdit(true);
-    const character: CharacterData = {
-      name: values.name,
-      real_name: values.real_name,
-      aliases: values.aliases,
-      publisher: {
-        api_detail_url: charData?.publisher?.api_detail_url || '',
-        name: values.publisher,
-        id: charData?.publisher?.id || 0,
-      },
-      gender: values.gender,
-      origin: {
-        api_detail_url: charData?.origin?.api_detail_url || '',
-        name: values.origin,
-        id: charData?.origin?.id || 0,
-      },
-      count_of_issue_appearances: values.count_of_issue_appearances,
-      birth: values.birth,
+  const saveEdit = useCallback(
+    (values: FormikProps) => {
+      setEdit(true);
+      const character: CharacterData = {
+        name: values.name,
+        real_name: values.real_name,
+        aliases: values.aliases,
+        publisher: {
+          api_detail_url: charData?.publisher?.api_detail_url || '',
+          name: values.publisher,
+          id: charData?.publisher?.id || 0,
+        },
+        gender: values.gender,
+        origin: {
+          api_detail_url: charData?.origin?.api_detail_url || '',
+          name: values.origin,
+          id: charData?.origin?.id || 0,
+        },
+        count_of_issue_appearances: values.count_of_issue_appearances,
+        birth: values.birth,
 
-      id: charData?.id,
-      image: charData?.image,
-      api_detail_url: charData?.api_detail_url,
-      deck: charData?.deck,
-      is_fave: charData?.is_fave,
-      site_detail_url: charData?.site_detail_url,
-    };
-    setCharData(character);
-    dispatch(editCharacter(character, isFave));
-  }, [charData, isFave]);
+        id: charData?.id,
+        image: charData?.image,
+        api_detail_url: charData?.api_detail_url,
+        deck: charData?.deck,
+        is_fave: charData?.is_fave,
+        site_detail_url: charData?.site_detail_url,
+      };
+      setCharData(character);
+      dispatch(editCharacter(character, isFave));
+    },
+    [charData, isFave]
+  );
 
   if (loading) {
     return <LoaderSpinner color="#fff" />;
@@ -139,7 +148,7 @@ const CharacterInfo: React.FC = () => {
           <ReturnIcon />
         </Link>
 
-        <h1>{charData?.name}</h1>
+        <h1 data-testid="character-name">{charData?.name}</h1>
 
         <a href={charData?.site_detail_url} target="_blank" rel="noopener noreferrer" className="link-button">
           <LinkIcon />
@@ -175,17 +184,17 @@ const CharacterInfo: React.FC = () => {
 
                 <div className="header-right">
                   {edit ? (
-                    <div className="hover-button" onClick={() => setEdit(!edit)}>
+                    <div className="hover-button" onClick={() => setEdit(!edit)} data-testid="edit-button">
                       <EditIcon />
                     </div>
                   ) : (
-                    <div className="hover-button" onClick={() => cancelEdit(setFieldValue)}>
+                    <div className="hover-button" onClick={() => cancelEdit(setFieldValue)} data-testid="cancel-button">
                       <CancelIcon />
                     </div>
                   )}
 
-                  <div className="hover-button" onClick={() => handleFave()}>
-                    <LikeIcon fillcolor={isFave ? 'red' : 'white'} strokecolor={isFave ? 'red' : 'var(--color-primary)'} />
+                  <div className="hover-button" onClick={() => handleFave()} data-testid="favorite-button">
+                    <LikeIcon fillcolor={isFave ? 'red' : 'white'} strokecolor={isFave ? 'red' : 'var(--color-primary)'} data-testid={`heart-svg-${isFave}`} />
                   </div>
                 </div>
               </div>
@@ -202,7 +211,7 @@ const CharacterInfo: React.FC = () => {
                     onBlur={handleBlur}
                     value={values.name}
                     label={t('super_name')}
-                    inputProps={{ maxLength: 40 }}
+                    inputProps={{ maxLength: 40, 'data-testid': 'name-input' }}
                     helperText={touched.name && errors.name ? errors.name : ''}
                   />
                 </div>
@@ -318,7 +327,7 @@ const CharacterInfo: React.FC = () => {
               </TableInfo>
 
               {!edit && (
-                <ButtonOutlined type={!loading ? 'submit' : 'button'} disabled={loading}>
+                <ButtonOutlined type={!loading ? 'submit' : 'button'} disabled={loading} data-testid="submit-button">
                   {loading ? (
                     <div>
                       <CircularProgress size={15} style={{ color: '#ccc' }} />

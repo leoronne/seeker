@@ -28,7 +28,12 @@ const Header: React.FC = () => {
       </HeaderLeft>
 
       <HeaderRight>
-        <Select value={language} onChange={e => changeLanguage(String(e.target.value))} MenuProps={{ classes: { paper: classes.selectOptions } }}>
+        <Select
+          value={language}
+          onChange={e => changeLanguage(String(e.target.value))}
+          MenuProps={{ classes: { paper: classes.selectOptions } }}
+          inputProps={{ 'data-testid': 'language-select' }}
+        >
           <MenuItem value="en">
             <USAIcon />
             <span>English (United States)</span>
@@ -39,7 +44,6 @@ const Header: React.FC = () => {
           </MenuItem>
         </Select>
       </HeaderRight>
-
     </HeaderWrapper>
   );
 };

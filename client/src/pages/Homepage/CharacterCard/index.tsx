@@ -32,8 +32,12 @@ const CharacterCard: React.FC<Props> = ({ data, handleFave }) => {
             </div>
 
             <div className="right">
-              <span className="link-button" onClick={() => handleFave(Boolean(character.is_fave), character, index)}>
-                <LikeIcon fillcolor={character.is_fave ? 'red' : 'white'} strokecolor={character.is_fave ? 'red' : 'var(--color-primary)'} />
+              <span className="link-button" onClick={() => handleFave(Boolean(character.is_fave), character, index)} data-testid={`favorite-button-${index}`}>
+                <LikeIcon
+                  fillcolor={character.is_fave ? 'red' : 'white'}
+                  strokecolor={character.is_fave ? 'red' : 'var(--color-primary)'}
+                  data-testid={`heart-svg-${index}-${Boolean(character.is_fave)}`}
+                />
               </span>
 
               <Link to={`/info/4005-${character?.id}`}>

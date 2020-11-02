@@ -167,6 +167,10 @@ export const Form = styled.form`
   justify-content: center;
   flex-direction: column;
 
+  button {
+    min-width: 150px;
+  }
+
   .bio {
     width: 100%;
     display: flex;

@@ -84,7 +84,12 @@ const Paginator: React.FC<Props> = ({ totalRecords = 1, recordsPerPage = 1, curr
   if (pages.totalPages > 1) {
     lines = pages.pages.map(page => {
       return (
-        <div key={page} className={page === currentPage ? 'current' : 'page'} onClick={() => setCurrentPage(page)}>
+        <div
+          key={page}
+          className={page === currentPage ? 'current' : 'page'}
+          onClick={() => setCurrentPage(page)}
+          data-testid={`${page === currentPage ? 'page-active' : `page-${page}`}`}
+        >
           {page}
         </div>
       );
@@ -104,6 +109,7 @@ const Paginator: React.FC<Props> = ({ totalRecords = 1, recordsPerPage = 1, curr
         onClick={() => {
           if (currentPage > 1 && pages.totalPages > 0) setCurrentPage(currentPage - 1);
         }}
+        data-testid="previous-page"
       >
         {'<'}
       </div>
@@ -113,6 +119,7 @@ const Paginator: React.FC<Props> = ({ totalRecords = 1, recordsPerPage = 1, curr
         onClick={() => {
           if (pages.totalPages !== currentPage && pages.totalPages > 0) setCurrentPage(currentPage + 1);
         }}
+        data-testid="next-page"
       >
         {'>'}
       </div>

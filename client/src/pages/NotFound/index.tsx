@@ -7,7 +7,7 @@ import { Container, Content, HomeIcon, Left, Main, Right } from './styles';
 const NotFound: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <Container>
+    <Container data-testid="not-found-page">
       <Content>
         <Main>
           <Left>
