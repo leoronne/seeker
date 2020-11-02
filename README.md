@@ -22,11 +22,11 @@ This repo contains a test for the Front-end Developer position at Méliuz.
 
 <br>
 
-Deployed [here](https://seeker-meliuz.web.app/).
+Deployed [here](https://seeker.ronne.dev/).
 
 <br>
 
-<!-- <p align="center">
+<p align="center">
   <img src="src\assets\img\project-1.gif"/>
 </p>
 
@@ -36,7 +36,13 @@ Deployed [here](https://seeker-meliuz.web.app/).
   <img src="src\assets\img\project-2.gif"/>
 </p>
 
-<br> -->
+<br>
+
+<p align="center">
+  <img src="src\assets\img\project-3.gif"/>
+</p>
+
+<br>
 
 ## Techs :rocket:
 
@@ -61,9 +67,9 @@ To start the application <strong>interface</strong> just run `npm run start:web`
 
 To start the application <strong>server</strong> just run `npm run dev:server` or `yarn dev:server` on the root dir of the folder.
 
-<strong>Note: you need to create a .env file on the [server directory](<https://github.com/leoronne/meliuz-frontend-test/blob/master/server/.env.example>) and one on the [client directory](<https://github.com/leoronne/meliuz-frontend-test/blob/master/client/.env.example>) based on the example files. 
+<strong>Note: you need to create a .env file on the [server directory](https://github.com/leoronne/meliuz-frontend-test/blob/master/server/.env.example) and one on the [client directory](https://github.com/leoronne/meliuz-frontend-test/blob/master/client/.env.example) based on the example files.
 
-You can generate the Comic Vine API Key [here](<https://comicvine.gamespot.com/api/>).
+You can generate the Comic Vine API Key [here](https://comicvine.gamespot.com/api/).
 
 </strong>
 

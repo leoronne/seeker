@@ -101,34 +101,40 @@ const CharacterInfo: React.FC = () => {
 
   const saveEdit = useCallback(
     (values: FormikProps) => {
-      setEdit(true);
-      const character: CharacterData = {
-        name: values.name,
-        real_name: values.real_name,
-        aliases: values.aliases,
-        publisher: {
-          api_detail_url: charData?.publisher?.api_detail_url || '',
-          name: values.publisher,
-          id: charData?.publisher?.id || 0,
-        },
-        gender: values.gender,
-        origin: {
-          api_detail_url: charData?.origin?.api_detail_url || '',
-          name: values.origin,
-          id: charData?.origin?.id || 0,
-        },
-        count_of_issue_appearances: values.count_of_issue_appearances,
-        birth: values.birth,
+      try {
+        setEdit(true);
+        const character: CharacterData = {
+          name: values.name,
+          real_name: values.real_name,
+          aliases: values.aliases,
+          publisher: {
+            api_detail_url: charData?.publisher?.api_detail_url || '',
+            name: values.publisher,
+            id: charData?.publisher?.id || 0,
+          },
+          gender: values.gender,
+          origin: {
+            api_detail_url: charData?.origin?.api_detail_url || '',
+            name: values.origin,
+            id: charData?.origin?.id || 0,
+          },
+          count_of_issue_appearances: values.count_of_issue_appearances,
+          birth: values.birth,
 
-        id: charData?.id,
-        image: charData?.image,
-        api_detail_url: charData?.api_detail_url,
-        deck: charData?.deck,
-        is_fave: charData?.is_fave,
-        site_detail_url: charData?.site_detail_url,
-      };
-      setCharData(character);
-      dispatch(editCharacter(character, isFave));
+          id: charData?.id,
+          image: charData?.image,
+          api_detail_url: charData?.api_detail_url,
+          deck: charData?.deck,
+          is_fave: charData?.is_fave,
+          site_detail_url: charData?.site_detail_url,
+        };
+        setCharData(character);
+        dispatch(editCharacter(character, isFave));
+
+        enqueueSnackbar(t('success-edit'), { variant: 'success' });
+      } catch (err) {
+        enqueueSnackbar(err?.response?.data?.error ? err.response.data.error : err.message, { variant: 'error' });
+      }
     },
     [charData, isFave]
   );

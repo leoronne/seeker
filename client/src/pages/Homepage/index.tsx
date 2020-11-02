@@ -71,41 +71,43 @@ const Homepage: React.FC = () => {
         setLoading(false);
       }
     },
-    [showFavorites]
+    [showFavorites, edittedCharacters]
   );
 
   const loadFavorites = useCallback(
-    async (page: number, limit: number) => {
+    async (value: string | null, page: number, limit: number) => {
       let oldEdittedCharacters = edittedCharacters || [];
 
-      if (search) {
-        oldEdittedCharacters = oldEdittedCharacters.filter(character => character.name === search);
+      oldEdittedCharacters = oldEdittedCharacters.filter(character => character?.is_fave === true);
+
+      if (value) {
+        oldEdittedCharacters = oldEdittedCharacters.filter(character => character.name.match(value));
       }
 
       setCharacters(oldEdittedCharacters.slice(page, limit + page));
       setTotalRecords(oldEdittedCharacters.length);
     },
-    [search, edittedCharacters]
+    [edittedCharacters]
   );
 
   const handleSubmit = useCallback(
     async e => {
       e.preventDefault();
       if (!showFavorites) await loadData(search, offset, recordsPerPage);
-      else loadFavorites(offset, recordsPerPage);
+      else loadFavorites(search, offset, recordsPerPage);
     },
     [search, showFavorites, offset, recordsPerPage]
   );
 
   useEffect(() => {
     if (NODE_ENV !== 'test') loadData('');
-  }, [loadData]);
+  }, [NODE_ENV]);
 
   const changeRecordsPerPage = useCallback(
     async (value: number) => {
       setRecordsPerPage(value);
       if (!showFavorites) await loadData(search, offset, value);
-      else loadFavorites(offset, value);
+      else loadFavorites(search, offset, value);
     },
     [offset, search, showFavorites, loadData, loadFavorites]
   );
@@ -118,8 +120,8 @@ const Homepage: React.FC = () => {
       setTargetPage(page);
 
       if (NODE_ENV !== 'test') {
-        if (!showFavorites) await loadData(search, tempOffset);
-        else loadFavorites(tempOffset, recordsPerPage);
+        if (!showFavorites) await loadData(search, tempOffset, recordsPerPage);
+        else loadFavorites(search, tempOffset, recordsPerPage);
       }
     },
     [recordsPerPage, showFavorites, loadData, loadFavorites]

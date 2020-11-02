@@ -27,5 +27,6 @@
   "return": "Return",
   "error-page-1": "Oops, something is wrong",
   "error-page-2": "We couldn't find the page you are looking for",
-  "save": "Save"
+  "save": "Save",
+  "success-edit": "Character data saved successfully"
 }

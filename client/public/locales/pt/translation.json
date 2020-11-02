@@ -27,5 +27,6 @@
   "return": "Voltar",
   "error-page-1": "Ops, há algo de errado",
   "error-page-2": "Não foi possível encontrar a página que você esta procurando",
-  "save": "Salvar"
+  "save": "Salvar",
+  "success-edit": "Dados salvos com sucesso"
 }
