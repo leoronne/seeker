@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FaHome } from 'react-icons/fa';
 
-import error from '~/assets/svg/404.svg';
+import error from '../../assets/svg/404.svg';
 
 export const Container = styled.div`
   width: 100%;

@@ -1,8 +1,8 @@
 export interface CharacterData {
   id: number;
-  aliases: string;
+  aliases: string | null;
   api_detail_url: string;
-  birth: string;
+  birth: string | null;
   count_of_issue_appearances: number | string;
   // creators: Array<{
   //   api_detail_url: string;
@@ -40,7 +40,7 @@ export interface CharacterData {
     id: number;
     name: string;
   };
-  real_name: string;
+  real_name: string | null;
   site_detail_url: string;
   is_fave: boolean;
 }

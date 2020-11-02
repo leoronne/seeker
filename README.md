@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="client\src\assets\img\transparentBanner.png" />
+  <img src="client\src\assets\img\transparentBanner.png" width="300px" />
 </p>
 
 ##

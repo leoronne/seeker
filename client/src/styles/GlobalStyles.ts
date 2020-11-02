@@ -131,7 +131,7 @@ export default createGlobalStyle`
       &:hover {
         transition: var(--transition-slow) !important;
         background: var(--color-primary) !important;
-        color: var(--whiteBackground) !important;
+        color: white !important;
       }
     }
   }

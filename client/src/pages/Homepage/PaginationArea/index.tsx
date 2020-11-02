@@ -30,7 +30,13 @@ const PaginationArea: React.FC<Props> = ({ totalRecords, recordsPerPage, targetP
         <FormControl variant="outlined">
           <InputLabel>{t('show')}</InputLabel>
 
-          <Select value={recordsPerPage} onChange={e => setRecordsPerPage(Number(e.target.value))} label={t('show')} MenuProps={{ classes: { paper: classes.selectOptions } }}>
+          <Select
+            value={recordsPerPage}
+            onChange={e => setRecordsPerPage(Number(e.target.value))}
+            label={t('show')}
+            MenuProps={{ classes: { paper: classes.selectOptions } }}
+            inputProps={{ 'data-testid': 'records-per-page-select' }}
+          >
             <MenuItem value="10">{`10 ${t('results-2')}`}</MenuItem>
             <MenuItem value="50">{`50 ${t('results-2')}`}</MenuItem>
             <MenuItem value="100">{`100 ${t('results-2')}`}</MenuItem>
