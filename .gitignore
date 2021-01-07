@@ -33,3 +33,5 @@ firebase.json
 .firebase
 
 .htaccess
+
+/__snapshots__

@@ -1,6 +1,16 @@
 <p align="center">
-  <img src="client\src\assets\img\transparentBanner.png" width="300px" />
+  <img src="src\assets\img\transparentBanner.png" width="50%"/>
 </p>
+
+<br>
+
+<div align="center" style="margin: 20px; text-align: center">
+
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+![GitHub last commit](https://img.shields.io/github/last-commit/leoronne/dropbox-homepage-ui-clone?color=green&style=flat-square)
+![GitHub top language](https://img.shields.io/github/languages/top/leoronne/dropbox-homepage-ui-clone?style=flat-square)
+
+</div>
 
 ##
 
@@ -16,11 +26,15 @@
 
 ##
 
+<p align="center">
+  <img src="src\assets\img\banner.png" />
+</p>
+
 <br>
 
 ## Project :star2:
 
-This repo contains a test for the Front-end Developer position at Méliuz.
+This repo contains an application named Seeker, it lets you search through a immersive Comic Book characters database. It's part of an developing challenge proposed by Méliuz.
 
 <br>
 
@@ -57,7 +71,7 @@ Deployed [here](https://seeker.ronne.dev/).
 
 ## General Information and Functionalities :information_source:
 
-Since the Comic Vine has a CORS policy, I implemented a backend on this project to make the requests to the Comic Vine API from it. So the front-end makes the requests to the backend server and the backend handle the requests to the real API and returns the data.
+Since the Comic Vine has a CORS policy, this application uses a backend service to make the requests to the Comic Vine API (server side). So the front-end makes the requests to the backend server and the backend handle the requests to the real API and returns the data.
 
 The application has two languages implemented (Portuguese-BR and English-USA), the user can easily alter it on the Header of the page. But it doesn't affect the data received from the API (since Comic Vine does not have this functionality implemented, unfortunatelly).
 
@@ -67,15 +81,13 @@ The user can also filter the results by name and those which are on his favorite
 
 On the Character Info page, the user has the hability to alter the character's data (name, real_name, aliases, origin, gender, publisher, count_of_issue_appearances and birth) and add the character to his favorite list, these changes persist in the Redux state throughout the entire application.
 
-To not overload this page, only one image is shown (the original_url) and since all the images are usually the same (differs only on size, dimensions and proportion).
-
 There is also a Not Found Page if the user tries to access a route that doesn't exists.
 
 <br>
 
 ## Installation :wrench:
 
-First you need to clone the project using `git clone https://github.com/leoronne/meliuz-frontend-test.git`.
+First you need to clone the project using `git clone https://github.com/leoronne/seeker.git`.
 
 Then you can install the application using `npm install` or `yarn install` on the client and server directory.
 
@@ -83,11 +95,11 @@ Then you can install the application using `npm install` or `yarn install` on th
 
 ## Start :on:
 
-To start the application <strong>interface</strong> just run `npm run start:web` or `yarn start:web` on the root dir of the folder.
+To start the application <strong>interface</strong> just run `npm run start:web` or `yarn start:web` on the root dir of this repo.
 
-To start the application <strong>server</strong> just run `npm run dev:server` or `yarn dev:server` on the root dir of the folder.
+To start the application <strong>server</strong> just run `npm run dev:server` or `yarn dev:server` on the root dir of this repo.
 
-<strong>Note: you need to create a .env file on the [server directory](https://github.com/leoronne/meliuz-frontend-test/blob/master/server/.env.example) and one on the [client directory](https://github.com/leoronne/meliuz-frontend-test/blob/master/client/.env.example) based on the example files.
+<strong>Note: you need to create a .env file on the [server directory](https://github.com/leoronne/seeker/blob/master/server/.env.example) and one on the [client directory](https://github.com/leoronne/seeker/blob/master/client/.env.example) based on the example files.
 
 You can generate the Comic Vine API Key [here](https://comicvine.gamespot.com/api/).
 
@@ -97,7 +109,9 @@ You can generate the Comic Vine API Key [here](https://comicvine.gamespot.com/ap
 
 ## Test :heavy_check_mark:
 
-To run the tests on this application, just run `npm run test:cover` or `yarn test:cover` on the client directory, it will generate a coverage report on the same dir.
+Only the front-end of this application has tests implemented.
+
+To run it, just run `npm run test:cover` or `yarn test:cover` on the client directory, it will generate a coverage report on the same dir.
 
 <br>
 
@@ -105,7 +119,7 @@ To run the tests on this application, just run `npm run test:cover` or `yarn tes
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
-- **[MIT license](https://github.com/leoronne/meliuz-frontend-test/blob/master/LICENSE)**
+- **[MIT license](https://github.com/leoronne/seeker/blob/master/LICENSE)**;
 - Copyright 2020 © <a href="https://github.com/leoronne" target="_blank">Leonardo Ronne</a>.
 
 ##

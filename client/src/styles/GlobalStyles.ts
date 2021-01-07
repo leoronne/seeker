@@ -29,6 +29,7 @@ export default createGlobalStyle`
     --card-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
 
     --border-radius: 8px;
+    --consent-text-color: #707070;
   }
 
   * {
