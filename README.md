@@ -27,7 +27,7 @@
 ##
 
 <p align="center">
-  <img src="src\assets\img\banner.png" />
+  <img src="client\src\assets\img\banner.png" />
 </p>
 
 <br>
