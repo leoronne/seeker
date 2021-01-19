@@ -115,6 +115,12 @@ To run it, just run `npm run test:cover` or `yarn test:cover` on the client dire
 
 <br>
 
+## Contributing 🤔
+
+Please read [CONTRIBUTING](https://github.com/leoronne/seeker/blob/master/CONTRIBUTING.md) for details on code of conduct, and the process for submitting pull requests to the project.
+
+<br>
+
 ## License :memo:
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
