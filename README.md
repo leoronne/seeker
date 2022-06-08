@@ -35,7 +35,9 @@
 
 ## Project :star2:
 
-This repo contains an application named Seeker, it lets you search through a immersive Comic Book characters database.
+Seeker is a basic search engine that let's the user navigate through a huge Comic Book characters [database](https://comicvine.gamespot.com/api/), based on the Game Spot (Comic Vine) public API.
+
+The user can also edit basic information about the character and add it to his favorites list (although, it's stored on the local storage of the browser).
 
 <br>
 
